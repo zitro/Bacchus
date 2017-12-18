@@ -6,7 +6,7 @@ options = {}
 
 optparse = OptionParser.new do |opts|
 
-	opts.banner = "Usage: sake.rb [options] ..."
+	opts.banner = "Usage: bacchus.rb [options] ..."
 
     options[:update] = false
     opts.on( '-u', '--update', 'Update presets' ) { |input| options[:update] = input }
