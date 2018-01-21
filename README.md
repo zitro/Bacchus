@@ -6,10 +6,16 @@ Managing Wine prefixes can be somewhat daunting for a newcomer and the existing 
 
 * Installing software from a setup.exe file
 
+* Output an executable .sh for ease of launching
+
 ## Planned Features
 * Installing software from a self-contained exe file.
 
 * Application management. Bacchus will manage all of your installed applications for you so you don't need to remember which application you installed in which prefix and how to launch it.
+
+* Backups. Bacchus will allow you to make backups of your prefixes. If you need to move to a new machine you can just load your backups; you will not need to reinstall all of your applications.
+
+* Search for preset names directly from Bacchus, no need to know the exact name in advance
 
 * An install.rb script so you don't have to make all of the dotfiles yourself.
 
