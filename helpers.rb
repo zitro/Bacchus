@@ -77,7 +77,7 @@ def build_launcher(hash)
 	end
 
 	# TODO Output the sh to a dotfile directory
-	name = ENV['HOME'] + '/' + exe + '.sh'
+	name = ENV['HOME'] + '/' + prefix_name + '.sh'
 
 	# TODO account for locale
 
