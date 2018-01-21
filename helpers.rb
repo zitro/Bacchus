@@ -88,4 +88,8 @@ def build_launcher(hash)
 	 	f.puts 'cd ' + ENV['HOME'] + '/.' + prefix_name + path
 	 	f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + exe + ".exe"
 	}
+
+	# Make the script executable
+	exec = "chmod 755 " + name
+	system exec
 end
