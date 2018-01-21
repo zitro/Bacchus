@@ -1,5 +1,6 @@
 require 'json'
 require 'pathname'
+require 'shellwords'
 
 def parse(file_name)
 	dir = ENV['HOME'] + '/.bacchus/presets/' + file_name + '.json'
@@ -22,13 +23,15 @@ def build_prefix(hash)
 end
 
 def winetricks(hash)
-	exec = "winetricks " + hash['winetricks']
+	prefix_name = hash['name']
+	exec = 'WINEPREFIX='  + ENV['HOME'] + '/.' + prefix_name + ' winetricks ' + hash['winetricks']
 	system exec
 end
 
 def install(hash)
 	type = hash['type']
 	software_name = hash['name']
+	locale = hash['locale']
 
 	if type == "exe"
 		puts "Please specify the path to the " + software_name + " exe file: "
@@ -44,7 +47,7 @@ def install(hash)
 	else
 		puts "Please specify the path to the " + software_name + " installer exe file: "
 		path = gets.chomp
-		launch_setup(path, software_name)
+		launch_setup(path, software_name, locale)
 	end
 end
 
@@ -58,19 +61,24 @@ def install_dir(path, prefix_name = nil)
 	system output
 end
 
-def launch_setup(path, prefix_name = nil)
+def launch_setup(path, prefix_name = nil, locale = nil)
 	if !prefix_name
 		prefix_name = '~/.wine' # Assume default wine directory
 	end
 
-	output = 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + path
+	if !locale
+		output = 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + path
+	else
+		output = 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name+  ' LANG="' + locale + '" wine ' + path
+	end
 	system output
 end
 
 def build_launcher(hash)
 	exe = hash['exe']
 	prefix_name = hash['name']
-	path = hash['path'].gsub(/ /, '\ ')
+	path = Shellwords.escape hash['path']
+	locale = hash['locale']
 
 	if !prefix_name
 		prefix_name = '~/.wine'
@@ -79,14 +87,16 @@ def build_launcher(hash)
 	# TODO Output the sh to a dotfile directory
 	name = ENV['HOME'] + '/' + prefix_name + '.sh'
 
-	# TODO account for locale
-
 	# TODO Check to make sure file doesn't already exist
 	file = File.new(name, 'w')
 	open(name, 'a') { |f|
 	 	f.puts '#!/bin/bash'
 	 	f.puts 'cd ' + ENV['HOME'] + '/.' + prefix_name + path
-	 	f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + exe + ".exe"
+	 	if !locale
+	 		f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + exe + ".exe"
+	 	else
+	 		f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' LANG="' + locale + '" wine ' + exe + ".exe"
+	 	end
 	}
 
 	# Make the script executable
