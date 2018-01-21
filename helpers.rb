@@ -66,7 +66,7 @@ def launch_setup(path, prefix_name = nil, locale = nil)
 		prefix_name = '~/.wine' # Assume default wine directory
 	end
 
-	if !locale
+	if locale == ""
 		output = 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + path
 	else
 		output = 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name+  ' LANG="' + locale + '" wine ' + path
@@ -92,7 +92,7 @@ def build_launcher(hash)
 	open(name, 'a') { |f|
 	 	f.puts '#!/bin/bash'
 	 	f.puts 'cd ' + ENV['HOME'] + '/.' + prefix_name + path
-	 	if !locale
+	 	if locale == ""
 	 		f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + exe + ".exe"
 	 	else
 	 		f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' LANG="' + locale + '" wine ' + exe + ".exe"
