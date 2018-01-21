@@ -61,10 +61,10 @@ if options[:install] != false
     end
 
     # install
-    path = install(hash)
+    install(hash)
 
     # build the launcher script
-    build_launcher(hash, path)
+    build_launcher(hash)
 end
 
 if options[:delete] != false

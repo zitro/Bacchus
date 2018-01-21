@@ -17,19 +17,13 @@ def build_prefix(hash)
 	win = hash['win']
 
 	# build the prefix
-	output = 'WINEARCH=' + arch + ' WINEPREFIX=~/.' + prefix_name + ' winecfg'
-	system output
+	output = 'WINEARCH=' + arch + ' WINEPREFIX=~/.' + prefix_name + ' winecfg &> /dev/null'
+	system output, :out => File::NULL
 end
 
 def winetricks(hash)
-	exec = "winetricks "
-
-	# get commands from hash
-	hash['winetricks'].each do |i|
-		puts i
-		#exec = exec + i " "
-	end
-	# execute
+	exec = "winetricks " + hash['winetricks']
+	system exec
 end
 
 def install(hash)
@@ -50,10 +44,8 @@ def install(hash)
 	else
 		puts "Please specify the path to the " + software_name + " installer exe file: "
 		path = gets.chomp
-		puts path
+		launch_setup(path, software_name)
 	end
-
-	return path
 end
 
 def install_dir(path, prefix_name = nil)
@@ -66,9 +58,20 @@ def install_dir(path, prefix_name = nil)
 	system output
 end
 
-def build_launcher(hash, path)
+def launch_setup(path, prefix_name = nil)
+	if !prefix_name
+		prefix_name = '~/.wine' # Assume default wine directory
+	end
+
+	output = 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + path
+	system output
+end
+
+def build_launcher(hash)
 	exe = hash['exe']
 	prefix_name = hash['name']
+	path = hash['path'].gsub(/ /, '\ ')
+
 	if !prefix_name
 		prefix_name = '~/.wine'
 	end
@@ -76,16 +79,13 @@ def build_launcher(hash, path)
 	# TODO Output the sh to a dotfile directory
 	name = ENV['HOME'] + '/' + exe + '.sh'
 
-	# Get the prefix directory where the exe is located
-	wine_dir_name = Pathname.new(path).split.last.to_s
-
 	# TODO account for locale
 
 	# TODO Check to make sure file doesn't already exist
 	file = File.new(name, 'w')
 	open(name, 'a') { |f|
 	 	f.puts '#!/bin/bash'
-	 	f.puts 'cd ' + ENV['HOME'] + '/.' + prefix_name + '/drive_c/Program\ Files/' + wine_dir_name
+	 	f.puts 'cd ' + ENV['HOME'] + '/.' + prefix_name + path
 	 	f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + exe + ".exe"
 	}
 end
