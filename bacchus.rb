@@ -1,5 +1,6 @@
 require 'optparse'
 require './helpers.rb'
+require './backup.rb'
 
 # Parsing options
 options = {}
@@ -19,6 +20,9 @@ optparse = OptionParser.new do |opts|
 
     options[:delete] = false
     opts.on( '-d', '--delete SOFTWARE', 'Delete software' ) { |input| options[:delete] = input }
+
+    options[:backup] = false
+    opts.on( '-b', '--backup', 'Backup software' ) { |input| options[:backup] = input }
 
 	# Help
     opts.on( '-h', '--help', 'Display this screen' ) do
@@ -73,4 +77,11 @@ if options[:delete] != false
     puts "Are you sure you want to delete " + options[:delete] + "? [Y/N]"
 
     # delete the prefix
+end
+
+if options[:backup] != false
+    puts "backup"
+
+    # backup
+    backup()
 end
