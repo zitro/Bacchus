@@ -18,13 +18,13 @@ def build_prefix(hash)
 	win = hash['win']
 
 	# build the prefix
-	output = 'WINEARCH=' + arch + ' WINEPREFIX=~/.' + prefix_name + ' winecfg &> /dev/null'
+	output = 'WINEARCH=' + arch + ' WINEPREFIX=~/.bacchus/prefixes/' + prefix_name + ' winecfg &> /dev/null'
 	system output, :out => File::NULL
 end
 
 def winetricks(hash)
 	prefix_name = hash['name']
-	exec = 'WINEPREFIX='  + ENV['HOME'] + '/.' + prefix_name + ' winetricks ' + hash['winetricks']
+	exec = 'WINEPREFIX='  + ENV['HOME'] + '/.bacchus/prefixes/' + prefix_name + ' winetricks ' + hash['winetricks']
 	system exec
 end
 
@@ -57,7 +57,7 @@ def install_dir(path, prefix_name = nil)
 	end
 
 	# TODO Be smart and don't just dump the contents if the user adds a slash to the end
-	output = 'cp -r ' + path + ' ~/.' + prefix_name + '/drive_c/Program\ Files'
+	output = 'cp -r ' + path + ' ~/.bacchus/prefixes/' + prefix_name + '/drive_c/Program\ Files'
 	system output
 end
 
@@ -67,9 +67,9 @@ def launch_setup(path, prefix_name = nil, locale = nil)
 	end
 
 	if locale == ""
-		output = 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + path
+		output = 'WINEPREFIX=' + ENV['HOME'] + '/.bacchus/prefixes/' + prefix_name + ' wine ' + path
 	else
-		output = 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name+  ' LANG="' + locale + '" wine ' + path
+		output = 'WINEPREFIX=' + ENV['HOME'] + '/.bacchus/prefixes/' + prefix_name+  ' LANG="' + locale + '" wine ' + path
 	end
 	system output
 end
@@ -91,11 +91,11 @@ def build_launcher(hash)
 	file = File.new(name, 'w')
 	open(name, 'a') { |f|
 	 	f.puts '#!/bin/bash'
-	 	f.puts 'cd ' + ENV['HOME'] + '/.' + prefix_name + path
+	 	f.puts 'cd ' + ENV['HOME'] + '/.bacchus/prefixes/' + prefix_name + path
 	 	if locale == ""
-	 		f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' wine ' + exe + ".exe"
+	 		f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.bacchus/prefixes/' + prefix_name + ' wine ' + exe + ".exe"
 	 	else
-	 		f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.' + prefix_name + ' LANG="' + locale + '" wine ' + exe + ".exe"
+	 		f.puts 'WINEPREFIX=' + ENV['HOME'] + '/.bacchus/prefixes/' + prefix_name + ' LANG="' + locale + '" wine ' + exe + ".exe"
 	 	end
 	}
 
