@@ -3,6 +3,18 @@ require 'rbconfig'
 # This whole thing is gross and needs to change at some point
 # Either need to make a gem or use something like ruby-packer
 
+# Create dotfiles
+dir = ENV['HOME'] + '/.bacchus'
+if !File.exist?(dir)
+	cmd = 'mkdir ' + dir
+	system cmd
+
+	cmd = 'mkdir ' + dir + '/prefixes'
+	system cmd
+
+	cmd = 'mkdir ' + dir + '/presets'
+	system cmd
+end
 
 # Build the bacchus executable script
 cmd = 'touch bacchus'
