@@ -39,7 +39,16 @@ optparse.parse!
 if options[:update] != false
 	puts "update"
 
-    # git pull the presets repo
+    dir = ENV['HOME'] + '/.bacchus/presets/'
+    check = dir + '*'
+
+    if (!Dir[check].empty?)
+        cmd = 'cd ' + dir + '; git pull'
+        system cmd
+    else
+        cmd = 'git clone https://github.com/spencerking/bacchus-winemaker.git ' + dir
+        system cmd
+    end
 end
 
 if options[:launch] != false
