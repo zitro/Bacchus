@@ -8,24 +8,25 @@ Managing Wine prefixes can be somewhat daunting for a newcomer and the existing 
 
 * Output an executable .sh for ease of launching
 
+* Creating a backup of your prefixes and launchers
+
 ## Planned Features
-* Installing software from a self-contained exe file.
+* Installing software from a self-contained exe file. I've struggled to find an example of this, but I'm sure they exist. If someone could point me to a free example I would appreciate it.
 
 * Application management. Bacchus will manage all of your installed applications for you so you don't need to remember which application you installed in which prefix and how to launch it.
 
-* Backups. Bacchus will allow you to make backups of your prefixes. If you need to move to a new machine you can just load your backups; you will not need to reinstall all of your applications.
-
 * Search for preset names directly from Bacchus, no need to know the exact name in advance
 
-* An install.rb script so you don't have to make all of the dotfiles yourself.
-
 ## Dependencies
-Ruby, bash, winetricks
+Ruby, bash, git, winetricks
+
+## Installing
+All you need to do is clone the repository and run make.rb.
 
 ## Supported Platforms
-Currently only tested on macOS, however Linux and *BSD will both be supported as well. Windows is probably supported through the Linux subsystem but I'm not sure why you would want to run Wine on Windows (I am in no rush to test it).
+Currently only tested on macOS 10.12 and 10.13, however Linux and *BSD will both be supported as well. Windows is probably supported through the Linux subsystem but I'm not sure why you would want to run Wine on Windows (I am in no rush to test it).
 
 ## Contributing
-I am currently not accepting pull requests but am definitely interested in hearing your complaints or suggestions. Feel free to write up an issue and I'll see what I can do.
+I am currently not accepting pull requests but am definitely interested in hearing your complaints or suggestions. I want to build out and clean up the basic functionality myself. Feel free to write up an issue and I'll see what I can do.
 
-I will be accepting pull-requests for presets files once that functionality is more developed.
+I am accepting pull requests over on the presets repository (bacchus-winemaker) and would love to have some more contributors.
