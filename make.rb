@@ -14,6 +14,9 @@ if !File.exist?(dir)
 
 	cmd = 'mkdir ' + dir + '/presets'
 	system cmd
+
+	cmd = 'mkdir ' + dir + '/launchers'
+	system cmd
 end
 
 # Build the bacchus executable script

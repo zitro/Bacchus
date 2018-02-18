@@ -84,8 +84,7 @@ def build_launcher(hash)
 		prefix_name = '~/.wine'
 	end
 
-	# TODO Output the sh to a dotfile directory
-	name = ENV['HOME'] + '/' + prefix_name + '.sh'
+	name = ENV['HOME'] + '/.bacchus/launchers/' + prefix_name + '.sh'
 
 	# TODO Check to make sure file doesn't already exist
 	file = File.new(name, 'w')
