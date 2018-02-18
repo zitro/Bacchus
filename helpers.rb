@@ -33,6 +33,13 @@ def install(hash)
 	software_name = hash['name']
 	locale = hash['locale']
 
+	# Clear the screen in case there is a bunch of winetricks text
+	# Makes it easy for the user to see they actually need to do something
+	# TODO Possibly break this out into a separate function,
+	# Not sure how often clearing the screen will be helpful
+	cmd = "clear"
+	system cmd
+
 	if type == "exe"
 		puts "Please specify the path to the " + software_name + " exe file: "
 		path = gets.chomp
