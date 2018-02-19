@@ -24,8 +24,8 @@ end
 
 def winetricks(hash)
 	prefix_name = hash['name']
-	exec = 'WINEPREFIX='  + ENV['HOME'] + '/.bacchus/prefixes/' + prefix_name + ' winetricks ' + hash['winetricks']
-	system exec
+	cmd = 'WINEPREFIX='  + ENV['HOME'] + '/.bacchus/prefixes/' + prefix_name + ' winetricks ' + hash['winetricks']
+	system cmd
 end
 
 def install(hash)

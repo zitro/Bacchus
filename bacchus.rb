@@ -62,7 +62,6 @@ if options[:launch] != false
 end
 
 if options[:install] != false
-	puts "install"
 
     # parse
     hash = parse(options[:install])
