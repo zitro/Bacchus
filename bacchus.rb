@@ -1,6 +1,7 @@
 require 'optparse'
 require './helpers.rb'
 require './backup.rb'
+require './search.rb'
 
 # Parsing options
 options = {}
@@ -23,6 +24,9 @@ optparse = OptionParser.new do |opts|
 
     options[:backup] = false
     opts.on( '-b', '--backup', 'Backup software' ) { |input| options[:backup] = input }
+
+    options[:search] = false
+    opts.on( '-s', '--search PRESET', 'Search presets' ) { |input| options[:search] = input }
 
 	# Help
     opts.on( '-h', '--help', 'Display this screen' ) do
@@ -94,4 +98,11 @@ if options[:backup] != false
 
     # backup
     backup()
+end
+
+if options[:search] != false
+    # Get search term
+    term = options[:search]
+
+    search(term)
 end

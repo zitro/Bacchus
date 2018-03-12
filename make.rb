@@ -43,6 +43,12 @@ system cmd
 cmd = "echo $'\n' >> bacchus"
 system cmd
 
+cmd = 'cat search.rb >> bacchus'
+system cmd
+
+cmd = "echo $'\n' >> bacchus"
+system cmd
+
 cmd = 'cat bacchus.rb | tail -n+4 >> bacchus'
 system cmd
 
