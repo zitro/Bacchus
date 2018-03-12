@@ -28,6 +28,9 @@ optparse = OptionParser.new do |opts|
     options[:search] = false
     opts.on( '-s', '--search PRESET', 'Search presets' ) { |input| options[:search] = input }
 
+    options[:applications] = false
+    opts.on( '-a', '--apps', 'List installed software' ) { |input| options[:applications] = input }
+
 	# Help
     opts.on( '-h', '--help', 'Display this screen' ) do
     	puts opts
@@ -105,4 +108,17 @@ if options[:search] != false
     term = options[:search]
 
     search(term)
+end
+
+if options[:applications] != false
+    dir = ENV['HOME'] + "/.bacchus/prefixes/*"
+
+    files = Dir[dir]
+
+    files.each do |file|
+        if File.directory? file
+            file_name = File.basename file
+            puts file_name
+        end
+    end
 end

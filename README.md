@@ -10,14 +10,14 @@ Managing Wine prefixes can be somewhat daunting for a newcomer and the existing 
 
 * Creating a backup of your prefixes and launchers
 
+* Search for preset names directly from Bacchus
+
 ## Planned Features
 * Installing software from a self-contained exe file. I've struggled to find an example of this, but I'm sure they exist. If someone could point me to a free example I would appreciate it.
 
 * Deleting prefixes and launchers from Bacchus.
 
 * Application management. Bacchus will manage all of your installed applications for you so you don't need to remember which application you installed in which prefix and how to launch it.
-
-* Search for preset names directly from Bacchus, no need to know the exact name in advance
 
 * A Ruby gem for those who want it
 
