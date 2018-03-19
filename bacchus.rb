@@ -2,6 +2,7 @@ require 'optparse'
 require './helpers.rb'
 require './backup.rb'
 require './search.rb'
+require './menu.rb'
 
 # Parsing options
 options = {}
@@ -30,6 +31,9 @@ optparse = OptionParser.new do |opts|
 
     options[:applications] = false
     opts.on( '-a', '--apps', 'List installed software' ) { |input| options[:applications] = input }
+
+    options[:menu] = false
+    opts.on( '-m', '--menu', 'Launch in ncurses mode' ) { |input| options[:menu] = input }
 
 	# Help
     opts.on( '-h', '--help', 'Display this screen' ) do
@@ -121,4 +125,8 @@ if options[:applications] != false
             puts file_name
         end
     end
+end
+
+if options[:menu] != false
+    menu()
 end
