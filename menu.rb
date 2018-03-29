@@ -56,9 +56,9 @@ def menu()
     		elsif level == "launch"
     			# Get the name of the application to launch
     			app_name = menu.current_item.item_name
-    			cmd = "bash " + ENV['HOME'] + "/.bacchus/launchers/" + app_name + ".sh"
+    			cmd = "bash " + ENV['HOME'] + "/.bacchus/launchers/" + app_name + ".sh &> /dev/null"
     			system cmd
-    			exit
+    			# exit
         	end
         end
         ch = Ncurses.getch
