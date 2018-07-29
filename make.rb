@@ -49,7 +49,7 @@ system cmd
 cmd = "echo $'\n' >> bacchus"
 system cmd
 
-cmd = 'cat bacchus.rb | tail -n+4 >> bacchus'
+cmd = 'cat bacchus.rb | tail -n+5 >> bacchus'
 system cmd
 
 cmd = 'chmod 755 bacchus'
